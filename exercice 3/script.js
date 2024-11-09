@@ -8,22 +8,31 @@ const RETRAIT = -150
 
 
 // Utilities
-const timestamp = () => {
-    return `Operation ${historiqueOperations.length + 1} : ` + new Date().toLocaleString()
+
+const timestamp = (TYPE,AMOUNT) => {
+    if(Number(AMOUNT)){
+        return `${historiqueOperations.length + 1} : ` + new Date().toLocaleString() + ` ${TYPE} de ${Math.abs(AMOUNT)} euros`
+    } else {
+        return `${historiqueOperations.length + 1} : ` + new Date().toLocaleString()
+    }
+}
+
+const messageOperation = (TYPE,AMOUNT,solde) => {
+    return `Vous avez ${TYPE} ${Math.abs(AMOUNT)} euros. Nouveau solde: ${solde} euros.`
 }
 
 const operationDepot = (DEPOT) => {
     solde += DEPOT
-    historiqueOperations.push(`${timestamp()} : Dépôt de ${Math.abs(DEPOT)} euros`)
-    console.info(`Vous avez déposé ${Math.abs(DEPOT)} euros. Nouveau solde: ${solde} euros.`)
+    historiqueOperations.push(timestamp("Dépôt",DEPOT))
+    console.info(messageOperation("déposé",DEPOT,solde))
     console.table(historiqueOperations)
 }
 
 const operationRetrait = (RETRAIT) => {
     if (solde + RETRAIT >= 0) {
         solde += RETRAIT
-        historiqueOperations.push(`${timestamp()} : Retrait de ${Math.abs(RETRAIT)} euros`)
-        console.info(`Vous avez retiré ${Math.abs(RETRAIT)} euros. Nouveau solde: ${solde} euros.`)
+        historiqueOperations.push(timestamp("Retrait",RETRAIT))
+        console.info(messageOperation("retiré",RETRAIT,solde))
         console.table(historiqueOperations)
     } else {
         console.log("Solde insuffisant pour effectuer ce RETRAIT.")
