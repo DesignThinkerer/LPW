@@ -11,14 +11,14 @@ const timestamp = () => {
     return new Date().toLocaleString();
 }
 
-const operationDepot = (depot, historiqueOperations) => {
+const operationDepot = (depot) => {
     solde += depot;
     console.info(`Vous avez déposé ${depot} euros. Nouveau solde: ${solde} euros.`);
     historiqueOperations.push(`${timestamp()} : Dépôt de ${depot} euros`);
     console.table(historiqueOperations);
 }
 
-const operationRetrait = (retrait, historiqueOperations) => {
+const operationRetrait = (retrait) => {
     if (solde + retrait >= 0) {
         solde += retrait;
         historiqueOperations.push(`${timestamp()} : Retrait de ${retrait} euros`);
@@ -29,7 +29,7 @@ const operationRetrait = (retrait, historiqueOperations) => {
     }
 }
 
-const operationSolde = (operation, historiqueOperations) => {
+const operationSolde = (operation) => {
     if (operation > 0) {
         operationDepot(operation, historiqueOperations);
     } else if (operation < 0) {
@@ -45,10 +45,10 @@ const calculInteret = () => {
 }
 
 // Dépôt
-operationSolde(depot, historiqueOperations);
+operationSolde(depot);
 
 // Retrait
-operationSolde(retrait, historiqueOperations);
+operationSolde(retrait);
 
 // Calcul des intérêts
 calculInteret();
@@ -56,5 +56,5 @@ calculInteret();
 // Simulation de plusieurs opérations
 let nouveauDepot = 500;
 
-operationSolde(nouveauDepot, historiqueOperations);
+operationSolde(nouveauDepot);
 calculInteret();
