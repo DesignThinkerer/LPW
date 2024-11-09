@@ -24,6 +24,10 @@ const timestamp = (TYPE,AMOUNT) => {
     }
 }
 
+const msgSolde = (solde) => {
+    return `Nouveau solde: ${solde.toFixed(2)} euros.`
+}
+
 /**
  * Génère un message indiquant le type d'opération, le montant et le nouveau solde.
  *
@@ -32,8 +36,8 @@ const timestamp = (TYPE,AMOUNT) => {
  * @param {number} solde - Le nouveau solde après l'opération.
  * @returns {string} Une chaîne de caractères décrivant l'opération et le nouveau solde.
  */
-const messageOperation = (TYPE,AMOUNT,solde) => {
-    return `Vous avez ${TYPE} ${Math.abs(AMOUNT)} euros. Nouveau solde: ${solde} euros.`
+const msgOperation = (TYPE,AMOUNT,solde) => {
+    return `Vous avez ${TYPE} ${Math.abs(AMOUNT)} euros. Nouveau solde: ${msgSolde(solde)} euros.`
 }
 
 /**
@@ -45,7 +49,7 @@ const messageOperation = (TYPE,AMOUNT,solde) => {
 const operationDepot = (DEPOT) => {
     solde += DEPOT
     HISTORIQUE.push(timestamp("Dépôt",DEPOT))
-    console.info(messageOperation("déposé",DEPOT,solde))
+    console.info(msgOperation("déposé",DEPOT,solde))
     console.table(HISTORIQUE)
 }
 
@@ -59,7 +63,7 @@ const operationRetrait = (RETRAIT) => {
     if (solde + RETRAIT >= 0) {
         solde += RETRAIT
         HISTORIQUE.push(timestamp("Retrait",RETRAIT))
-        console.info(messageOperation("retiré",RETRAIT,solde))
+        console.info(msgOperation("retiré",RETRAIT,solde))
         console.table(HISTORIQUE)
     } else {
         console.log("Solde insuffisant pour effectuer ce RETRAIT.")
@@ -97,8 +101,9 @@ const operationSolde = (OPERATION) => {
  */
 const calculInteret = () => {
     solde += solde * TAUX_INTERET
-    console.log(`Intérêts annuels de 3% ajoutés. Nouveau solde : ${solde} euros.`)
-    HISTORIQUE.push(`${timestamp()} : Intérêts annuels de 3% ajoutés.`)
+    const MSG = "Intérêts annuels de 3% ajoutés.";
+    console.log(`${MSG} ${msgSolde(solde)}`)
+    HISTORIQUE.push(`${timestamp()} : ${MSG}`)
 }
 
 // Dépôt
