@@ -2,38 +2,38 @@
 const TAUX_INTERET = 0.03;
 
 let solde = 1000;
-let depot = 200;
-let retrait = -150;
+const DEPOT = 200;
+const RETRAIT = -150;
 let historiqueOperations = [];
 
 // Utilities
 const timestamp = () => {
-    return new Date().toLocaleString();
+    return `Operation ${historiqueOperations.length + 1} : ` + new Date().toLocaleString();
 }
 
-const operationDepot = (depot) => {
-    solde += depot;
-    console.info(`Vous avez déposé ${depot} euros. Nouveau solde: ${solde} euros.`);
-    historiqueOperations.push(`${timestamp()} : Dépôt de ${depot} euros`);
+const operationDEPOT = (DEPOT) => {
+    solde += DEPOT;
+    console.info(`Vous avez déposé ${DEPOT} euros. Nouveau solde: ${solde} euros.`);
+    historiqueOperations.push(`${timestamp()} : Dépôt de ${DEPOT} euros`);
     console.table(historiqueOperations);
 }
 
-const operationRetrait = (retrait) => {
-    if (solde + retrait >= 0) {
-        solde += retrait;
-        historiqueOperations.push(`${timestamp()} : Retrait de ${retrait} euros`);
-        console.info(`Vous avez retiré ${retrait} euros. Nouveau solde: ${solde} euros.`);
+const operationRETRAIT = (RETRAIT) => {
+    if (solde + RETRAIT >= 0) {
+        solde += RETRAIT;
+        historiqueOperations.push(`${timestamp()} : RETRAIT de ${RETRAIT} euros`);
+        console.info(`Vous avez retiré ${RETRAIT} euros. Nouveau solde: ${solde} euros.`);
         console.table(historiqueOperations);
     } else {
-        console.log("Solde insuffisant pour effectuer ce retrait.");
+        console.log("Solde insuffisant pour effectuer ce RETRAIT.");
     }
 }
 
 const operationSolde = (operation) => {
     if (operation > 0) {
-        operationDepot(operation);
+        operationDEPOT(operation);
     } else if (operation < 0) {
-        operationRetrait(operation);
+        operationRETRAIT(operation);
     } else {
         console.log("L'opération n'est pas valide !");
     }
@@ -42,24 +42,25 @@ const operationSolde = (operation) => {
 const calculInteret = () => {
     solde += solde * TAUX_INTERET;
     console.log(`Intérêts annuels de 3% ajoutés. Nouveau solde : ${solde} euros.`);
+    historiqueOperations.push(`${timestamp()} : Intérêts annuels de 3% ajoutés.`);
 }
 
 // Dépôt
-operationSolde(depot);
+operationSolde(DEPOT);
 
-// Retrait
-operationSolde(retrait);
+// RETRAIT
+operationSolde(RETRAIT);
 
 // Calcul des intérêts
 calculInteret();
 
 // Simulation de plusieurs opérations
-let nouveauDepot = 500
+const nouveauDEPOT = 500
 
-operationSolde(nouveauDepot);
+operationSolde(nouveauDEPOT);
 
-let nouveauRetrait = -800
+const nouveauRETRAIT = -800
 
-operationSolde(nouveauRetrait);
+operationSolde(nouveauRETRAIT);
 
 calculInteret();
