@@ -1,35 +1,42 @@
 // Initialisations variables
 
 const TAUX_INTERET = 0.03
-const timestamp = () => {
-    return new Date().toLocaleString()
-}
+
 let solde = 1000
 let depot = 200
 let retrait = 150
 let historiqueOperations = []
 
+// Utilities
+
+const timestamp = () => {
+    return new Date().toLocaleString()
+}
+
 const operationDepot = (depot, historiqueOperations) => {
+    console.info(`Vous avez deposé ${depot} euros. Nouveau solde: ${solde += depot} euros.`)
     historiqueOperations[historiqueOperations.length] = `${timestamp()} : Dépôt de ${depot} euros`;
     console.table(historiqueOperations);
 }
 
-const operationRetrait = (depot, historiqueOperations) => {
-    historiqueOperations[historiqueOperations.length] = `${timestamp()} : Retrait de ${depot} euros`;
+const operationRetrait = (retrait, historiqueOperations) => {
+    console.info(`Vous avez retiré ${retrait} euros. Nouveau solde: ${solde -= retrait} euros.`)
+    historiqueOperations[historiqueOperations.length] = `${timestamp()} : Retrait de ${retrait} euros`;
     console.table(historiqueOperations);
 }
 
-// Dépôt
+const calculInteret = (solde) => {
+    console.log(`Intérêts annuels de 3% ajoutés. Nouveau solde : ${solde += solde*TAUX_INTERET} euros.`)
+}
 
-console.log(`Vous avez deposé ${depot} euros. Nouveau solde: ${solde += depot} euros.`)
+
+// Dépôt
 operationDepot(depot,historiqueOperations)
 
 // Retrait
 
 if(solde - retrait > 0){
-    console.log(`Vous avez retiré ${retrait} euros. Nouveau solde : ${solde -= retrait} euros.`)
     operationRetrait(retrait,historiqueOperations)
-
 } else {
     console.log(
         "Solde insuffisant pour effectuer ce retrait."
@@ -38,23 +45,21 @@ if(solde - retrait > 0){
 
 // Calcul des intérêts
 
-console.log(`Intérêts annuels de 3% ajoutés. Nouveau solde : ${solde += solde*TAUX_INTERET} euros.`)
+calculInteret(solde)
 
 //Simulation de plusieurs opérations
 
 let nouveauDepot = 500
 
-console.log(`Vous avez deposé ${nouveauDepot} euros. Nouveau solde: ${solde += nouveauDepot} euros.`)
 operationDepot(nouveauDepot,historiqueOperations)
 
 let nouveauRetrait = 800
 
 if(solde - nouveauRetrait > 0){
-    console.log(`Vous avez retiré ${nouveauRetrait} euros. Nouveau solde : ${solde -= nouveauRetrait} euros.`)
     operationRetrait(nouveauRetrait,historiqueOperations)
 
 } else {
     console.log("Solde insuffisant pour effectuer ce retrait.")
 }
 
-console.log(`Intérêts annuels de 3% ajoutés. Nouveau solde : ${solde += solde*TAUX_INTERET} euros.`)
+calculInteret(solde)
