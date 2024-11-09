@@ -1,6 +1,6 @@
 // Initialisations variables
 
-const tauxInteret = 0.03
+const TAUX_INTERET = 0.03
 let solde = 1000
 let depot = 200
 let retrait = 150
@@ -44,7 +44,7 @@ if(solde - retrait > 0){
 
 console.log(
     "Intérêts annuels de 3% ajoutés. Nouveau solde : "
-    + (solde += solde*tauxInteret)
+    + (solde += solde*TAUX_INTERET)
     +" euros."
 )
 
@@ -85,6 +85,6 @@ if(solde - nouveauRetrait > 0){
 
 console.log(
     "Intérêts annuels de 3% ajoutés. Nouveau solde : "
-    + (solde += solde*tauxInteret)
+    + (solde += solde*TAUX_INTERET)
     +" euros."
 )
