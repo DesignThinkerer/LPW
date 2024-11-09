@@ -1,10 +1,11 @@
 // Initialisations variables
+let solde = 1000;
+let historiqueOperations = [];
 const TAUX_INTERET = 0.03;
 
-let solde = 1000;
 const DEPOT = 200;
 const RETRAIT = -150;
-let historiqueOperations = [];
+
 
 // Utilities
 const timestamp = () => {
