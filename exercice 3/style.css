@@ -1,0 +1,35 @@
+:root{
+    --color-background-primary: #f4f4f4;
+    --color-text-primary: blue;
+    --color-border-primary: #dcdcdc;
+    
+    /* Typography scale */
+    --font-size-base:12px;
+    --font-size-heading-large: 28px;
+    --font-size-heading-medium: 20px;
+    
+    /* Font family */
+    --font-family-primary: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background-color: var(--color-background-primary);
+}
+
+header{
+    color:var(--color-text-primary);
+    text-align: center;
+    font-family: var(--font-family-primary);
+}
+
+main{
+    border:solid 2px var(--color-border-primary);
+}
+
+h1{
+    font-size: var(--font-size-heading-large);
+}
+
+h2{
+    font-size: var(--font-size-heading-medium);
+}
