@@ -31,9 +31,9 @@ const operationRetrait = (retrait) => {
 
 const operationSolde = (operation) => {
     if (operation > 0) {
-        operationDepot(operation, historiqueOperations);
+        operationDepot(operation);
     } else if (operation < 0) {
-        operationRetrait(operation, historiqueOperations);
+        operationRetrait(operation);
     } else {
         console.log("L'opération n'est pas valide !");
     }
@@ -54,7 +54,12 @@ operationSolde(retrait);
 calculInteret();
 
 // Simulation de plusieurs opérations
-let nouveauDepot = 500;
+let nouveauDepot = 500
 
 operationSolde(nouveauDepot);
+
+let nouveauRetrait = -800
+
+operationSolde(nouveauRetrait);
+
 calculInteret();
