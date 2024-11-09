@@ -15,7 +15,7 @@ const timestamp = () => {
 const operationDepot = (DEPOT) => {
     solde += DEPOT
     historiqueOperations.push(`${timestamp()} : Dépôt de ${Math.abs(DEPOT)} euros`)
-    console.info(`Vous avez déposé ${DEPOT} euros. Nouveau solde: ${solde} euros.`)
+    console.info(`Vous avez déposé ${Math.abs(DEPOT)} euros. Nouveau solde: ${solde} euros.`)
     console.table(historiqueOperations)
 }
 
@@ -23,7 +23,7 @@ const operationRetrait = (RETRAIT) => {
     if (solde + RETRAIT >= 0) {
         solde += RETRAIT
         historiqueOperations.push(`${timestamp()} : Retrait de ${Math.abs(RETRAIT)} euros`)
-        console.info(`Vous avez retiré ${RETRAIT} euros. Nouveau solde: ${solde} euros.`)
+        console.info(`Vous avez retiré ${Math.abs(RETRAIT)} euros. Nouveau solde: ${solde} euros.`)
         console.table(historiqueOperations)
     } else {
         console.log("Solde insuffisant pour effectuer ce RETRAIT.")
