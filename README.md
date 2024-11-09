@@ -1,3 +1,3 @@
-* <a href="exercice 1/index.html">exercice 1</a>
-* <a href="exercice 2/index.html">exercice 2</a>
-* <a href="exercice 3/index.html">exercice 3</a>
+* [exercice 1](https://designthinkerer.github.io/LPW/exercice%201/)
+* [exercice 2](https://designthinkerer.github.io/LPW/exercice%202/)
+* [exercice 3](https://designthinkerer.github.io/LPW/exercice%203/)
