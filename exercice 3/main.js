@@ -1,39 +1,33 @@
-import CompteBancaire from "./CompteBancaire.js"; // Ensure the correct path
+import CompteBancaire from "CompteBancaire";
 
 document.addEventListener("DOMContentLoaded", () => {
     const output = document.querySelector("output");
     const originalLog = console.log;
     const originalTable = console.table;
 
-    // Override console.log
     console.log = function (...args) {
         args.forEach(arg => {
+            const newLog = document.createElement("div");
             if (typeof arg === "object") {
-                const newLog = document.createElement("div");
                 newLog.textContent = JSON.stringify(arg, null, 2);
-                output.appendChild(newLog);
             } else {
-                const newLog = document.createElement("div");
                 newLog.textContent = arg;
-                output.appendChild(newLog);
             }
+            output.appendChild(newLog);
         });
 
         originalLog.apply(console, args);
     };
 
-    // Override console.table
     console.table = function (data) {
-        if (Array.isArray(data) || typeof data === "object") {
+        if (Array.isArray(data) || (typeof data === "object" && data !== null)) {
             const table = document.createElement("table");
             table.style.border = "1px solid black";
             table.style.borderCollapse = "collapse";
             table.style.marginTop = "10px";
             table.style.width = "100%";
 
-            // Handle array of objects
             if (Array.isArray(data) && data.length > 0 && typeof data[0] === "object") {
-                // Create table header
                 const thead = document.createElement("thead");
                 const headerRow = document.createElement("tr");
                 Object.keys(data[0]).forEach(key => {
@@ -46,7 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 thead.appendChild(headerRow);
                 table.appendChild(thead);
 
-                // Create table rows
                 const tbody = document.createElement("tbody");
                 data.forEach(row => {
                     const tr = document.createElement("tr");
@@ -62,7 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 table.appendChild(tbody);
             }
 
-            // Handle single object
             else if (typeof data === "object" && !Array.isArray(data)) {
                 const thead = document.createElement("thead");
                 const headerRow = document.createElement("tr");
@@ -99,19 +91,17 @@ document.addEventListener("DOMContentLoaded", () => {
         originalTable.apply(console, [data]);
     };
 
-    // Create and use the CompteBancaire class
     const compte = new CompteBancaire(1000);
     console.log(`Initial balance: ${compte.balance} euros.`);
 
-    // Perform some transactions
     compte.performTransaction(200);
     compte.performTransaction(-150);
     compte.calculateInterest();
+    console.table(compte.history.map((item, index) => ({ Index: index + 1, Operation: item })));
     compte.performTransaction(500);
     compte.performTransaction(-800);
     compte.calculateInterest();
 
-    // Display the transaction history
-    console.log("Transaction history:");
+    console.log("Final transaction history:");
     console.table(compte.history.map((item, index) => ({ Index: index + 1, Operation: item })));
 });
