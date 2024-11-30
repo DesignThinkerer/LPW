@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     transactionForm.addEventListener("submit", (event) => {
         event.preventDefault();
-        compte.performTransaction(transactionInput.value);
+        compte.performTransaction(parseFloat(transactionInput.value));
         transactionInput.value = "";
     });
 
