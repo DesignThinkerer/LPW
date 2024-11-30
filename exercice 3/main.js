@@ -2,14 +2,11 @@ import BankAccount from "BankAccount";
 import Logger from "Logger";
 
 document.addEventListener("DOMContentLoaded", () => {
-    const outputElement = document.querySelector("output");
     new Logger(outputElement);
     const compte = new BankAccount(0);
 
-    const transactionForm = document.querySelector("#transaction-form");
-    const transactionInput = document.querySelector("#transaction-amount");
-    const calculateInterestBtn = document.querySelector("#calculate-interest");
-    const currentBalance = document.querySelector("#current-balance");
+    const [output, transactionForm, transactionInput, calculateInterestBtn, currentBalance] = ["output", "#transaction-form", "#transaction-amount", "#calculate-interest", "#current-balance"].map(document.querySelector.bind(document));
+
 
     const updateBalance = () => {
         currentBalance.textContent = `${compte.balance} EUR`;
