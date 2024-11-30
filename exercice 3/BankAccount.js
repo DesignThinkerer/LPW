@@ -1,12 +1,10 @@
 export default class BankAccount {
     #balance;
-    #history;
-    #interestRate;
+    #history = [];
+    #interestRate = 0.03;
 
-    constructor(initialBalance) {
+    constructor(initialBalance = 0) {
         this.#balance = initialBalance;
-        this.#history = [];
-        this.#interestRate = 0.03;
     }
 
     get balance() {
