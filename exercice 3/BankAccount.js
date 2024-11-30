@@ -1,4 +1,4 @@
-export default class CompteBancaire {
+export default class BankAccount {
     #balance;
     #history;
     #interestRate;

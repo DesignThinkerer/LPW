@@ -1,10 +1,10 @@
-import CompteBancaire from "CompteBancaire";
+import BankAccount from "BankAccount";
 import Logger from "Logger";
 
 document.addEventListener("DOMContentLoaded", () => {
     const outputElement = document.querySelector("output");
     new Logger(outputElement);
-    const compte = new CompteBancaire(1000);
+    const compte = new BankAccount(1000);
 
     const transactionForm = document.querySelector("#transaction-form");
     const transactionInput = document.querySelector("#transaction-amount");
