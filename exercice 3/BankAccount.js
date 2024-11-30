@@ -85,7 +85,7 @@ export default class BankAccount {
     calculateInterest() {
         const interest = this.#balance * this.#interestRate;
         this.balance = this.#balance + interest;
-        const message = `Annual interest of 3% added (${interest.toFixed(2)} euros).`;
+        const message = `Intérêt annuel de  ${this.#interestRate} ajouté (${interest.toFixed(2)} euros).`;
         console.log(`${message} ${this.#getBalanceMessage()}`);
         this.#history.push(`${this.#generateTimestamp()} : ${message}`);
     }
