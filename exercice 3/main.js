@@ -9,9 +9,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const transactionForm = document.querySelector("#transaction-form");
     const transactionInput = document.querySelector("#transaction-amount");
     const calculateInterestBtn = document.querySelector("#calculate-interest");
+    const currentBalance = document.querySelector("#current-balance");
 
     const updateBalance = () => {
-        outputElement.textContent = `Balance: ${compte.getBalance().toFixed(2)} EUR`;
+        currentBalance.textContent = `Balance: ${compte.getBalance().toFixed(2)} EUR`;
     };
 
     updateBalance();
