@@ -1,4 +1,5 @@
 import CompteBancaire from "CompteBancaire";
+import Logger from "Logger";
 
 document.addEventListener("DOMContentLoaded", () => {
     new Logger(document.querySelector("output"));
