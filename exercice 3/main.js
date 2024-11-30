@@ -4,15 +4,15 @@ import CompteBancaire from "CompteBancaire";
 const compte = new CompteBancaire(1000);
 
 // Dépôt
-compte.operationSolde(200);
+compte.performTransaction(200);
 
 // Retrait
-compte.operationSolde(-150);
+compte.performTransaction(-150);
 
 // Calcul des intérêts
-compte.calculInteret();
+compte.calculateInterest();
 
 // Simulation de plusieurs opérations
-compte.operationSolde(500);
-compte.operationSolde(-800);
-compte.calculInteret();
+compte.performTransaction(500);
+compte.performTransaction(-800);
+compte.calculateInterest();
