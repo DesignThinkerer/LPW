@@ -4,7 +4,7 @@ import Logger from "Logger";
 document.addEventListener("DOMContentLoaded", () => {
     const outputElement = document.querySelector("output");
     new Logger(outputElement);
-    const compte = new BankAccount(1000);
+    const compte = new BankAccount(0);
 
     const transactionForm = document.querySelector("#transaction-form");
     const transactionInput = document.querySelector("#transaction-amount");
