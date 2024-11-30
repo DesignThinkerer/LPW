@@ -44,11 +44,11 @@ export default class BankAccount {
     }
 
     #getBalanceMessage() {
-        return `New balance: ${this.balance} euros.`;
+        return `Nouveau solde: ${this.balance} euros.`;
     }
 
     #formatOperationMessage(type, amount) {
-        return `You have ${type} ${Math.abs(amount)} euros. ${this.#getBalanceMessage()}`;
+        return `Vous avez ${type} ${Math.abs(amount)} euros. ${this.#getBalanceMessage()}`;
     }
 
     #processDeposit(amount) {
@@ -65,14 +65,14 @@ export default class BankAccount {
             console.info(this.#formatOperationMessage("withdrawn", amount));
             console.table(this.#history);
         } else {
-            console.log("Insufficient balance to perform this withdrawal.");
+            console.log("Solde insuffisant.");
         }
     }
 
     performTransaction(amount) {
         try {
             if (typeof amount !== "number" || isNaN(amount)) {
-                throw new Error(`Invalid transaction amount: ${amount}`);
+                throw new Error(amount);
             }
             if (amount >= 0) {
                 this.#processDeposit(amount);
@@ -80,7 +80,7 @@ export default class BankAccount {
                 this.#processWithdrawal(amount);
             }
         } catch (error) {
-            console.log("Invalid transaction:", error.message);
+            console.log("Transaction invalide:", error.message);
         }
     }
 
