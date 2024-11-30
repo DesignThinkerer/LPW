@@ -6,9 +6,11 @@ export default class Logger {
         this.outputElement = outputElement;
         this.originalLog = console.log;
         this.originalTable = console.table;
+        this.originalInfo = console.info;
 
         this.overrideConsoleLog();
         this.overrideConsoleTable();
+        this.overrideConsoleInfo();
     }
 
     overrideConsoleLog() {
@@ -49,6 +51,36 @@ export default class Logger {
 
             this.outputElement.appendChild(table);
             this.originalTable.apply(console, [data]);
+        };
+    }
+
+    overrideConsoleInfo() {
+        console.info = (...args) => {
+            args.forEach(arg => {
+                const toast = document.createElement("div");
+                toast.textContent = typeof arg === "object" ? JSON.stringify(arg, null, 2) : arg;
+                toast.style.position = "fixed";
+                toast.style.bottom = "20px";
+                toast.style.right = "20px";
+                toast.style.backgroundColor = "#007bff";
+                toast.style.color = "white";
+                toast.style.padding = "10px 20px";
+                toast.style.borderRadius = "5px";
+                toast.style.boxShadow = "0 2px 5px rgba(0, 0, 0, 0.3)";
+                toast.style.zIndex = "1000";
+                toast.style.transition = "opacity 0.5s ease-in-out";
+
+                document.body.appendChild(toast);
+
+                setTimeout(() => {
+                    toast.style.opacity = "0";
+                    setTimeout(() => {
+                        document.body.removeChild(toast);
+                    }, 500);
+                }, 3000);
+            });
+
+            this.originalInfo.apply(console, args);
         };
     }
 
