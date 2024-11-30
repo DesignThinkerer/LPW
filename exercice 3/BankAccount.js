@@ -35,7 +35,7 @@ export default class BankAccount {
 
     #generateTimestamp(type, amount) {
         if (!isNaN(amount)) {
-            return `${this.#history.length + 1} : ` + new Date().toLocaleString() + ` ${type} of ${Math.abs(amount)} euros`;
+            return `${this.#history.length + 1} : ` + new Date().toLocaleString() + ` ${type} de ${Math.abs(amount)} euros`;
         } else {
             return `${this.#history.length + 1} : ` + new Date().toLocaleString();
         }
@@ -51,16 +51,16 @@ export default class BankAccount {
 
     #processDeposit(amount) {
         this.balance = this.#balance + amount;
-        this.#history.push(this.#generateTimestamp("Deposit", amount));
-        console.info(this.#formatOperationMessage("deposited", amount));
+        this.#history.push(this.#generateTimestamp("Dépôt", amount));
+        console.info(this.#formatOperationMessage("déposé", amount));
         console.table(this.#history);
     }
 
     #processWithdrawal(amount) {
         if (this.#balance + amount >= 0) {
             this.balance = this.#balance + amount;
-            this.#history.push(this.#generateTimestamp("Withdrawal", amount));
-            console.info(this.#formatOperationMessage("withdrawn", amount));
+            this.#history.push(this.#generateTimestamp("Retrait", amount));
+            console.info(this.#formatOperationMessage("retiré", amount));
             console.table(this.#history);
         } else {
             console.log("Solde insuffisant.");
