@@ -1,18 +1,21 @@
 import CompteBancaire from "CompteBancaire";
 
-// Utilisation de la classe CompteBancaire
+const output = document.querySelector("output");
+const originalLog = console.log;
+
+console.log = function (...args) {
+    const message = args.map(arg => (typeof arg === "object" ? JSON.stringify(arg, null, 2) : arg)).join(" ");
+    const newLog = document.createElement("div");
+    newLog.textContent = message;
+    output.appendChild(newLog);
+    originalLog.apply(console, args);
+};
+
 const compte = new CompteBancaire(1000);
 
-// Dépôt
 compte.performTransaction(200);
-
-// Retrait
 compte.performTransaction(-150);
-
-// Calcul des intérêts
 compte.calculateInterest();
-
-// Simulation de plusieurs opérations
 compte.performTransaction(500);
 compte.performTransaction(-800);
 compte.calculateInterest();
