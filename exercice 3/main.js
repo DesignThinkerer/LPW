@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     new Logger(outputElement);
     const compte = new BankAccount(0);
 
-    const [output, transactionForm, transactionInput, calculateInterestBtn, currentBalance] = ["output", "#transaction-form", "#transaction-amount", "#calculate-interest", "#current-balance"].map(selector => document.querySelector(selector));
+    const [outputElement, transactionForm, transactionInput, calculateInterestBtn, currentBalance] = ["output", "#transaction-form", "#transaction-amount", "#calculate-interest", "#current-balance"].map(selector => document.querySelector(selector));
 
 
     const updateBalance = () => {
