@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentBalance = document.querySelector("#current-balance");
 
     const updateBalance = () => {
-        currentBalance.textContent = `Balance: ${compte.balance} EUR`;
+        currentBalance.textContent = `Current balance: ${compte.balance} EUR`;
     };
 
     updateBalance();
