@@ -1,4 +1,4 @@
-import Client from './Client.js';
+import Client from 'Client';
 
 export default class FilePostale {
     #clients;
@@ -23,13 +23,11 @@ export default class FilePostale {
      * @returns {Client} Le client qui a été servi.
      */
     servirClient() {
-        if (this.#clients.length === 0) {
+        if (!this.#clients.length) {
             throw new Error("La file est vide, aucun client à servir.");
         }
 
-        // Trouver un client prioritaire si disponible
-        const indexPrioritaire = this.#clients.findIndex(client => client.prioritaire);
-        const indexServi = indexPrioritaire !== -1 ? indexPrioritaire : 0;
+        const indexServi = this.#clients.findIndex(client => client.prioritaire) ?? 0;
 
         return this.#clients.splice(indexServi, 1)[0];
     }
@@ -39,7 +37,7 @@ export default class FilePostale {
      * @returns {string[]} Un tableau de descriptions des clients.
      */
     afficherFile() {
-        if (this.#clients.length === 0) {
+        if (!this.#clients.length) {
             return ["La file est vide."];
         }
 
