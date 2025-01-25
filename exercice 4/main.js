@@ -5,18 +5,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const file = new FilePostale();
     const fileContainer = document.getElementById("file-postale");
     const servirButton = document.getElementById("servir-client");
+    const clientForm = document.getElementById("client-form");
+    const nomInput = document.getElementById("nom");
+    const prenomInput = document.getElementById("prenom"); 
 
     const afficherFile = () => {
         fileContainer.innerHTML = "";
         file.clients.forEach(client => {
             const listItem = document.createElement("li");
-            listItem.textContent = client.toString(); 
+            listItem.textContent = client.toString();
             fileContainer.appendChild(listItem);
         });
     };
 
-    const ajouterClient = (nom, besoin, prioritaire) => {
-        const client = new Client(nom, besoin, prioritaire);
+    const ajouterClient = (nom, prenom, besoin, prioritaire) => {
+        const client = new Client(nom, prenom, besoin, prioritaire);
         file.ajouterClient(client);
         afficherFile();
     };
@@ -27,12 +30,21 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log(`Client servi : ${clientServi.toString()}`);
             afficherFile();
         } catch (error) {
-            console.error(error.message); 
+            console.error(error.message);
         }
     });
 
-    // Initial clients (could be fetched from elsewhere or added dynamically)
-    ajouterClient("Alice", "Envoi de courrier", false);
-    ajouterClient("Bob", "Retrait de colis", true);
-    ajouterClient("Charlie", "Paiement de facture", false);
+    clientForm.addEventListener("submit", (event) => {
+        event.preventDefault(); 
+        const nom = nomInput.value;
+        const prenom = prenomInput.value;
+        const besoin = besoinInput.value;
+        const prioritaire = prioritairenput.value;
+        ajouterClient(nom, prenom, besoin, prioritaire);
+        clientForm.reset();
+    });
+
+    // Initial clients (optional)
+    // ajouterClient("Alice", "A", "Envoi de courrier", false);
+    // ajouterClient("Bob", "B", "Retrait de colis", true); 
 });
