@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulateur de file d'attente</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="importmap">
+        {
+          "imports": {
+            "Client": "./Client.js",
+            "FilePostale": "./FilePostale.js"
+          }
+        }
+    </script>
+    <script src="main.js" type="module"></script>
+</head>
+
+<body>
+    <section>
+        <h2>Ajouter un client</h2>
+        <form action="" method="post">
+            <div>
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" name="Nom" required>
+            </div>
+            <div>
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" name="Prénom" required>
+            </div>
+            <button type="submit">Créer le client</button>
+        </form>
+    </section>
+    
+    <section>
+        <h2>Liste d'attente</h2>
+        <ul>
+            <li>
+                <span>Client 1</span>
+                <button type="button">Servir</button>
+            </li>
+            <li>
+                <span>Client 2</span>
+                <button type="button">Servir</button>
+            </li>
+            <li>
+                <span>Client 3</span>
+                <button type="button">Servir</button>
+            </li>
+            <li>
+                <span>Client ..</span>
+                <button type="button">Servir</button>
+            </li>
+        </ul>
+    </section>
+    
+    <section>
+        <p class="info">
+            <em>Marie Dupont (Service : Retrait de colis) a été servie.</em>
+        </p>
+    </section>    
+</body>
+</html>
