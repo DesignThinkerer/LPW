@@ -1,25 +1,39 @@
-import Client from "./Client.js";
-import FilePostale from "./FilePostale.js";
+import Client from "Client";
+import FilePostale from "FilePostale";
 
 document.addEventListener("DOMContentLoaded", () => {
+    const [
+        fileContainer, 
+        servirButton, 
+        clientForm, 
+        nomInput, 
+        serviceDemandéInput, 
+        prioritaireInput
+    ] = 
+    [
+        "#file-postale", 
+        "#servir-client", 
+        "#client-form", 
+        "#nom", 
+        "#serviceDemandé", 
+        "#prioritaire"
+    ].map(selector => document.querySelector(selector));
+
     const file = new FilePostale();
-    const fileContainer = document.getElementById("file-postale");
-    const servirButton = document.getElementById("servir-client");
-    const clientForm = document.getElementById("client-form");
-    const nomInput = document.getElementById("nom");
-    const prenomInput = document.getElementById("prenom"); 
 
     const afficherFile = () => {
-        fileContainer.innerHTML = "";
-        file.clients.forEach(client => {
+        fileContainer.innerHTML = ""; 
+        const listeClients = document.createElement("ul");
+        file.afficherFile().forEach(client => { 
             const listItem = document.createElement("li");
-            listItem.textContent = client.toString();
-            fileContainer.appendChild(listItem);
+            listItem.textContent = client;
+            listeClients.appendChild(listItem);
         });
+        fileContainer.appendChild(listeClients); 
     };
 
-    const ajouterClient = (nom, prenom, besoin, prioritaire) => {
-        const client = new Client(nom, prenom, besoin, prioritaire);
+    const ajouterClient = (nom, serviceDemandé, prioritaire) => {
+        const client = new Client(nom, serviceDemandé, prioritaire);
         file.ajouterClient(client);
         afficherFile();
     };
@@ -37,14 +51,9 @@ document.addEventListener("DOMContentLoaded", () => {
     clientForm.addEventListener("submit", (event) => {
         event.preventDefault(); 
         const nom = nomInput.value;
-        const prenom = prenomInput.value;
-        const besoin = besoinInput.value;
-        const prioritaire = prioritairenput.value;
-        ajouterClient(nom, prenom, besoin, prioritaire);
+        const serviceDemandé = serviceDemandéInput.value; 
+        const prioritaire = prioritaireInput.checked; 
+        ajouterClient(nom, serviceDemandé, prioritaire);
         clientForm.reset();
     });
-
-    // Initial clients (optional)
-    // ajouterClient("Alice", "A", "Envoi de courrier", false);
-    // ajouterClient("Bob", "B", "Retrait de colis", true); 
 });
